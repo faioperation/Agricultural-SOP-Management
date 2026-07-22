@@ -84,6 +84,7 @@ process.on("SIGTERM", async () => {
 /**
  * 🟡 SIGINT (Ctrl + C)
  */
+
 process.on("SIGINT", async () => {
   console.log("SIGINT signal received... shutting down gracefully");
 
