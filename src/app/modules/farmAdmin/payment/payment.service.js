@@ -67,8 +67,8 @@ const createCheckoutSession = async (user, payload) => {
         priceType,
       },
     },
-    success_url: `${envVars.FRONT_END_URL}/dashboard?payment=success`,
-    cancel_url: `${envVars.FRONT_END_URL}/dashboard?payment=cancel`,
+    success_url: `${envVars.FRONT_END_URL}/admin/subscription/billing`,
+    cancel_url: `${envVars.FRONT_END_URL}/admin/subscription/billing`,
     customer_email: user.email,
     metadata: {
       farmId: user.farmId,
