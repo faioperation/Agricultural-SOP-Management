@@ -1,6 +1,6 @@
 import app from "./app.js";
 import { envVars } from "./app/config/env.js";
-// import { connectRedis } from "./app/config/redis.config.js";
+import { connectRedis } from "./app/config/redis.config.js";
 import prisma from "./app/prisma/client.js";
 import { initSocket } from "./app/socket/index.js";
 
@@ -84,6 +84,7 @@ process.on("SIGTERM", async () => {
 /**
  * 🟡 SIGINT (Ctrl + C)
  */
+
 process.on("SIGINT", async () => {
   console.log("SIGINT signal received... shutting down gracefully");
 
