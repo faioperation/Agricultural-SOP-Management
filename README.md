@@ -1,137 +1,70 @@
-# 🌾 Agricultural SOP Management System (Backend)
+# Agricultural SOP Management SaaS - Enterprise Portal
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
-[![Express.js](https://img.shields.io/badge/framework-Express.js-blue)](https://expressjs.com/)
-[![Prisma](https://img.shields.io/badge/ORM-Prisma-2D3748?logo=prisma)](https://www.prisma.io/)
-[![PostgreSQL](https://img.shields.io/badge/database-PostgreSQL-336791?logo=postgresql)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/cache-Redis-DC382D?logo=redis)](https://redis.io/)
-
-A robust, enterprise-grade backend solution designed to manage **Standard Operating Procedures (SOPs)** in agricultural environments. This system empowers farm owners, managers, and employees with streamlined workflows, real-time oversight, and automated task management.
+An enterprise-grade multi-tenant platform designed to optimize agricultural operations through digitalized Standard Operating Procedures (SOPs), real-time team messaging, task scheduling, and AI-driven manual parsing.
 
 ---
 
 ## 🚀 Key Features
 
-### 🔐 Multi-Role Authentication & Security
-- **Role-Based Access Control (RBAC)**: System Owner, Farm Admin, Farm Manager, and Employee.
-- **Secure Login**: JWT-based authentication with refresh token logic.
-- **OAuth Integration**: Google Login support for seamless onboarding.
-- **OTP Verification**: Email-based OTP for registration and password recovery.
-
-### 🚜 Farm Management & SOPs
-- **SOP Creation & Assignment**: Detailed Standard Operating Procedures management.
-- **Oversight Dashboard**: Real-time monitoring of farm activities and SOP compliance.
-- **Automated Scheduling**: Handling recurring agricultural tasks.
-
-### 💳 Subscription & Billing
-- **Payment Integration**: Secure transactions via **Stripe**.
-- **Subscription Plans**: Manage different tiers of access for farm admins.
-- **Billing History**: Automated invoice generation and payment tracking.
-
-### 💬 Real-time Communication & Notifications
-- **Live Updates**: Socket.io integration for instant notifications and dashboard sync.
-- **Messaging System**: Internal messaging between farm roles.
-- **Email Alerts**: Responsive EJS templates for system-wide communications.
-
-### ⚙️ Infrastructure & Tech Stack
-- **ORM**: Prisma for type-safe database interactions.
-- **Performance**: Redis caching for optimized data retrieval.
-- **Validation**: Schema-based request validation using **Zod**.
-- **File System**: Multer-based multi-category file uploads (avatars, SOP documents).
+* **Multi-Tenant Farm Isolation**: Clean data partitioning supporting granular permissions across System Owners, Farm Admins, Managers, and Employees.
+* **AI-Powered SOP Parser**: Processes raw PDF/Word documents to output structured, interactive checklists with localized language parameters.
+* **Task Dispatch & Completion Tracking**: Shifts, automated scheduling, and proof of work verification with completion logs.
+* **Real-time Notifications & Chat**: Instant direct messaging utilizing Socket.IO websocket orchestration.
+* **Integrated Subscriptions & Stripe Payments**: Out-of-the-box billing supporting tier limits on employee numbers.
 
 ---
 
-## 🛠️ Tech Stack & Packages
+## 🛠 Tech Stack
 
-| Category | Technology |
-| :--- | :--- |
-| **Core** | Node.js (ESM), Express.js |
-| **Database** | PostgreSQL, Prisma ORM |
-| **Caching** | Redis |
-| **Real-time** | Socket.io |
-| **Payments** | Stripe |
-| **Auth** | Passport.js, JWT, Bcrypt |
-| **Email** | Nodemailer, EJS |
-| **Validation** | Zod |
+* **Frontend**: React, Vite, Tailwind CSS v4, React Query, React Router Dom
+* **Backend**: Node.js, Express, Prisma ORM, Socket.IO, PDFKit
+* **Databases**: PostgreSQL (Relational schema), Redis (Session Cache & Event Queue)
+* **Mobile Client**: Flutter SDK, GetX State Management
+* **Containerization**: Docker, Docker Compose, Nginx Reverse Proxy
 
 ---
 
-## 📦 Project Structure
+## 📂 Project Organization
 
-```bash
-src/
-├── app/
-│   ├── config/         # App configuration (env, passport, etc.)
-│   ├── modules/        # Feature-based business logic
-│   │   ├── auth/       # Authentication (Login, Register, OAuth)
-│   │   ├── farmAdmin/  # Farm Admin dashboards & settings
-│   │   ├── employee/   # Employee tasks and profiles
-│   │   ├── sop/        # SOP management (Standard Operating Procedures)
-│   │   └── payment/    # Stripe integration & subscriptions
-│   ├── middleware/     # Auth, validation, and error middlewares
-│   ├── router/         # Centralized API routing
-│   ├── socket/         # Real-time event handlers
-│   └── utils/          # Helper functions & shared resources
-├── server.js           # Server initialization
-└── app.js              # Express application setup
+```
+├── app-codebase/         # Flutter Mobile Client codebase
+├── backend/              # Node.js Express server with Prisma Schema definitions
+└── frontend/             # React SPA (Vite, Tailwind v4)
 ```
 
 ---
 
-## ⚙️ Installation
+## ⚡ Quick Start
 
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/kishormahmud9/Agricultural-SOP-Management-Back-End.git
-   cd Agricultural-SOP-Management-Back-End
-   ```
+### 1. Setup Environment
+Copy the example environment configuration:
+```bash
+cp .env.example .env
+```
+Modify `.env` to supply database connections, JWT secrets, Redis endpoints, and Stripe API credentials.
 
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
+### 2. Run with Docker Compose
+To boot up the entire development ecosystem (Nginx, React Frontend, Node.js Backend, Postgres DB, and Redis):
+```bash
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+```
 
-3. **Environment Setup**
-   Create a `.env` file in the root directory:
-   ```env
-   DATABASE_URL="postgresql://user:password@localhost:5432/db_name"
-   REDIS_URL="redis://localhost:6379"
-   JWT_SECRET="your_secret_key"
-   STRIPE_SECRET_KEY="your_stripe_key"
-   # ... (see .env.example for full list)
-   ```
-
-4. **Database Migration**
-   ```bash
-   npx prisma generate
-   npx prisma db push
-   ```
-
-5. **Start the Server**
-   ```bash
-   # Development mode
-   npm run dev
-
-   # Production mode
-   npm start
-   ```
+Access the systems at:
+* **Frontend UI**: `http://localhost:3000`
+* **API Engine**: `http://localhost:8000/api`
 
 ---
 
-## 📜 License
+## 🛡 Security & Best Practices
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🤝 Contact & Support
-
-Developed with ❤️ by **FireAI Agency**
-
-- **Author**: **Kishor Mahmud / MD. Nowazesh Kobir Rifat**
-- **Organization**: FireAI Agency
-- **GitHub**: [@kishormahmud9](https://github.com/kishormahmud9) / [@NKRifat47](https://github.com/NKRifat47)
+1. **Authentication**: Handled via stateless JWT tokens with automatic expiration and refresh token rotation.
+2. **Access Control**: Strict role-based routing (RBAC) separating System Owners from Farm Admins, Managers, and field Employees.
+3. **Database Security**: Powered by Prisma's param-safe query generator preventing SQL Injections.
 
 ---
-*Created for modern agriculture management.* ©️ 2026 FireAI Agency
+
+## 📈 Performance Optimization
+
+* **Database Level**: Indexes configured on high-traffic fields (`role`, `farmId`, `email`, `status`).
+* **Caching**: Redis is utilized for caching session information and managing rate limits.
+* **Docker Multi-Stage Compilation**: Clean production builds eliminating build-time dependencies, maintaining minimal image footprints.
