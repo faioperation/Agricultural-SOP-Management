@@ -13,8 +13,8 @@ RUN npm install
 # 5. Copy all source code
 COPY . .
 
-# 6. Generate Prisma client
-RUN npx prisma generate
+# 6. Generate Prisma client (build-time placeholder; real URL is injected at runtime)
+RUN DATABASE_URL="postgresql://postgres:postgres@localhost:5432/placeholder" npx prisma generate
 
 # 7. Expose app port
 EXPOSE 8000
