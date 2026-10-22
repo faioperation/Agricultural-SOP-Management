@@ -38,7 +38,7 @@ services:
       - REDIS_USERNAME=default
       - REDIS_PASSWORD=secure_redis_password
     env_file:
-      - .env
+      - ./backend/.env
     depends_on:
       postgres:
         condition: service_healthy
